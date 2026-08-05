@@ -1,6 +1,6 @@
 ---
 name: review
-description: Post-feature self-review for Fast Lane. Use before calling any feature, phase, or bugfix done — runs the automated checks and verifies the diff against CLAUDE.md's boundary.
+description: Post-feature self-review for Fast Lane. Use before calling any feature, phase, or bugfix done — runs the automated checks, verifies the diff against CLAUDE.md's boundary, and scans for new tech-debt signatures.
 ---
 
 Run this before reporting a feature/phase as complete. It's the same checklist the
@@ -28,6 +28,23 @@ Read the actual diff (`git diff`) and check for:
 - **New UI logic lives in `src/components/`, not duplicated game logic** — if a component
   is doing arithmetic or state transitions that belong in `turnEngine.ts`, flag it.
 
-## 3. Report
-State pass/fail per check (1–3 above), not just a summary — if something was fixed along
+## 3. Debt-signature scan
+Grep the touched files (or all of `src/` if the change is broad) for the same four
+signatures MRT's `debt-ledger` skill tracks under its Protocol B — fast-lane-scaled to
+one step in this checklist rather than a separate skill with its own bi-weekly cadence
+and ledger file, since there's no `ACTIVE_CYCLE.md` "Chores" section for it to feed:
+
+- `TODO` / `FIXME` / `HACK`
+- `@ts-ignore` / `@ts-expect-error`
+- explicit `any` (`: any`, `<any>`, `as any` — not just the substring "any" in comments)
+- any **new** `eslint-disable` beyond the one known-acceptable line in
+  `src/contexts/GameSessionContext.tsx` (`react-refresh/only-export-components`)
+
+Flag anything new. Fix the root cause, or — if the user has explicitly agreed a
+suppression is warranted — leave a comment next to it explaining why, the same way the
+existing `GameSessionContext.tsx` line already does, so the next reader doesn't have to
+re-derive the reasoning from scratch.
+
+## 4. Report
+State pass/fail per check (1–4 above), not just a summary — if something was fixed along
 the way, say what and why so it's traceable in the conversation.

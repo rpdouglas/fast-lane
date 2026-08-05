@@ -23,7 +23,11 @@ stripped out during extraction).
 - `src/components/` — presentational + container components
 - `src/hooks/` — save/progress/share-image hooks
 - `src/contexts/` — GameSessionContext
-- `docs/scratch_pad/` — planning docs, gap analyses, migration plans
+- `docs/Design/` — durable design references (e.g. `fastlane_personas.md`)
+- `docs/governance/` — this project's governance process doc
+- `docs/scratch_pad/` — ephemeral planning docs, gap analyses, migration plans; promote
+  anything meant to be durable out to a named location when it's done (see
+  `docs/governance/GOVERNANCE.md`)
 
 ## The one non-negotiable boundary
 Never reintroduce Firebase/Firestore, encryption, or `react-router-dom` navigation into this
@@ -32,7 +36,10 @@ changed"). If a feature seems to need routing or a backend, that's a signal it b
 in MRT2, not here.
 
 ## Workflow
-- Use Plan Mode (`Shift+Tab`) before starting any non-trivial feature or refactor.
+- **Spec gate (light):** non-trivial work gets a written plan before implementation
+  starts — Plan Mode (`Shift+Tab`) reviewed live, or a dated doc in `docs/scratch_pad/`
+  for anything worth a durable record. This is fast-lane's scaled-down version of a
+  hard spec-gate; see `docs/governance/GOVERNANCE.md` for the reasoning.
 - Prefer the `explorer` subagent for read-only research over doing it in the main context.
 - Prefer the `implementer` subagent for isolated, scoped implementation work.
 - Run the `/review` skill (or the `reviewer` subagent) before calling a feature or phase done.
@@ -43,6 +50,8 @@ in MRT2, not here.
   the previous phase built into the Zustand store), so work it phase-by-phase in one
   session/worktree, not split across parallel ones.
 
-## CI-failing rules
-- `npm run build` and `npm run lint` must both pass clean before a PR is opened.
+## Before you push
+There's no CI and no PR gate — pushes go straight to `main`. That makes these checks
+manual and non-negotiable before every push, not automated safety nets:
+- `npm run build` (typecheck + production build) and `npm run lint` must both pass clean.
 - `npm run test:once` must pass.
