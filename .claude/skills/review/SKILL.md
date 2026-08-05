@@ -19,14 +19,20 @@ that as a temporary measure.
 ## 2. Diff review against CLAUDE.md's boundary
 Read the actual diff (`git diff`) and check for:
 
-- **No Firebase/Firestore, encryption, or `react-router-dom`** reintroduced anywhere —
-  this repo was deliberately decoupled from MRT2's backend during extraction (see README).
+- **No Firebase backend (Firestore, Firebase Auth), encryption, or `react-router-dom`**
+  reintroduced anywhere — this repo was deliberately decoupled from MRT2's backend during
+  extraction (see README). Firebase **Hosting** config (`firebase.json`, `.firebaserc`,
+  `.github/workflows/firebase-hosting-*.yml`) is the one exception — see CLAUDE.md's
+  "one non-negotiable boundary" carve-out.
 - **`src/lib/fastLane/` stays framework-agnostic** — no `import React` / `import ... from
   'react'` inside that directory.
 - **`localStorage` is only touched from `hooks/useGameSave.ts` / `hooks/useGameProgress.ts`**
   — not from components or other hooks directly.
 - **New UI logic lives in `src/components/`, not duplicated game logic** — if a component
   is doing arithmetic or state transitions that belong in `turnEngine.ts`, flag it.
+- **New/changed event, activity-outcome, or pitfall content passes the Content & Tone
+  Boundary** (CLAUDE.md) — Ringer Test, Punchline Test, Non-Manipulation Commitment. Skip
+  this check only if the diff has no player-facing narrative/event content.
 
 ## 3. Debt-signature scan
 Grep the touched files (or all of `src/` if the change is broad) for the same four

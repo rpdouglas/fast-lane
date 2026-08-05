@@ -3,3 +3,8 @@ dist
 dist-ssr
 *.local
 .DS_Store
+
+# Firebase CLI local artifacts — firebase.json/.firebaserc are committed, these aren't
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
