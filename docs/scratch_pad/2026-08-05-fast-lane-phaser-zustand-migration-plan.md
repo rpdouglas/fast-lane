@@ -1,5 +1,16 @@
 # Fast Lane: Zustand + Phaser Board Migration
 
+> **Superseded / folded in:** this plan was written against the old Jones-style domain
+> (Work/University/Shop/Apartment/Financials/Risky/Self-Care, wealth/wellbeing goals vs. AI
+> rival "Casey") and was never executed — no `phaser`/`zustand` deps, no `src/state/` or
+> `src/game/` directories exist as of this note. The redesign to "One Day at a Time"
+> (`docs/Design/fast-lane_master_design_document.md`) replaces that entire domain, but this
+> plan's *architecture* — Zustand as the store/hook-boundary bridge, Phaser owning
+> board/token rendering, the Phaser↔React boundary rules, pixel-art rendering, crisis-lock
+> pattern shape — is being reused, remapped onto the new ROSC locations/content, in the
+> redesign's implementation plan (Phases 3–4). Kept here for its architecture-decision
+> record; not to be executed as written against the old domain below.
+
 ## Context
 
 Fast Lane currently plays through a tab-based UI: a "Weekly Planner" tab shows a grid of

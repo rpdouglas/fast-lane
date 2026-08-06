@@ -262,7 +262,7 @@ function FastLaneGame() {
 
 export default function FastLane() {
   return (
-    <GameShell title="Fast Lane">
+    <GameShell title="One Day at a Time">
       <FastLaneGame />
     </GameShell>
   );
