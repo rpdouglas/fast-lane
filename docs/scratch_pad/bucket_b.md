@@ -38,7 +38,7 @@ this repo:
 |---|---|
 | "Are you ready to proceed?" | **Yes** |
 | Project selection | **Use an existing project** → `mrt-one-day`. Confirmed with the user this project is dedicated to fast-lane and currently has no Hosting configured — not MRT2's live backend project. |
-| Hosting site | Set fast-lane up as its **own Hosting site** within `mrt-one-day` (multi-site hosting), not the project's default site — keeps it cleanly separated even though it shares a project. If `firebase init hosting:github` doesn't prompt for a site name, run `firebase hosting:sites:create <site-id>` first, then `firebase target:apply hosting fast-lane <site-id>` before re-running init. |
+| Hosting site | **Resolved: using `mrt-one-day`'s default Hosting site as-is**, not a separate multi-site setup — confirmed with the user that `mrt-one-day` will only ever host fast-lane, so the extra separation isn't needed. `firebase.json`/`.firebaserc` have no `site`/`target` key, which is correct for this setup. |
 | "What do you want to use as your public directory?" | **dist** |
 | "Configure as a single-page app (rewrite all urls to /index.html)?" | **Yes** |
 | "Set up automatic builds and deploys with GitHub?" | **Yes** |
