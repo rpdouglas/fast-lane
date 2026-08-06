@@ -26,7 +26,7 @@ confirmation code back into the terminal.
 ## 2. Create the project + wire GitHub Actions
 
 ```bash
-npx firebase-tools@latest init hosting:github
+unpx firebase-tools@latest init hosting:github
 ```
 
 This single command creates the Firebase project, configures Hosting, and sets up the
@@ -37,7 +37,8 @@ this repo:
 | Prompt | Answer |
 |---|---|
 | "Are you ready to proceed?" | **Yes** |
-| Project selection | **Create a new project** — pick a globally-unique project ID (e.g. `fast-lane-<something>`), display name "Fast Lane". **Do not** select the existing MRT2 project — fast-lane gets its own, fully isolated from MRT2's Firestore/Auth. |
+| Project selection | **Use an existing project** → `mrt-one-day`. Confirmed with the user this project is dedicated to fast-lane and currently has no Hosting configured — not MRT2's live backend project. |
+| Hosting site | Set fast-lane up as its **own Hosting site** within `mrt-one-day` (multi-site hosting), not the project's default site — keeps it cleanly separated even though it shares a project. If `firebase init hosting:github` doesn't prompt for a site name, run `firebase hosting:sites:create <site-id>` first, then `firebase target:apply hosting fast-lane <site-id>` before re-running init. |
 | "What do you want to use as your public directory?" | **dist** |
 | "Configure as a single-page app (rewrite all urls to /index.html)?" | **Yes** |
 | "Set up automatic builds and deploys with GitHub?" | **Yes** |
@@ -56,6 +57,26 @@ This generates, in the repo:
 repo automatically — this is the part deliberately left to the CLI's own tested flow rather
 than hand-rolled, since a mistake in service-account JSON handling is exactly the kind of
 thing not worth risking by hand.
+
+### Troubleshooting: "Service account ... does not exist" (404)
+
+Hit this on the first attempt: `firebase init` silently reused a stale cached project
+association (`~/.config/configstore/firebase-tools.json` → `activeProjects`, keyed by this
+directory's absolute path) and then tried to reuse a GitHub Actions service account that no
+longer exists for that project. Fix:
+
+```bash
+npx firebase-tools@latest use --clear
+npx firebase-tools@latest init hosting:github
+```
+
+Re-run project/site selection explicitly (don't let it silently default) — pick `mrt-one-day`
+and set up its own Hosting site per the table above. If the same SA 404 recurs, it means a
+previous partial `init` run left a broken service-account reference specifically on
+`mrt-one-day`; check `gh secret list --repo rpdouglas/fast-lane` for a stray
+`FIREBASE_SERVICE_ACCOUNT_*` secret from that attempt and delete it (`gh secret remove ...`)
+before retrying, so init creates a fresh service account rather than trying to reuse the dead
+one.
 
 ## 3. (Optional) Enforce the PR-based workflow mechanically
 
