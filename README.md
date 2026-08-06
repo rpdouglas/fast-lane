@@ -1,4 +1,5 @@
-# Fast Lane (standalone)
+# One Day at a Time (standalone)
+*(working title, previously "Fast Lane" — see `docs/Design/fast-lane_master_design_document.md`)*
 
 A multi-week economic life-sim with an AI rival ("Casey") — manage jobs and
 promotions, courses, a wellbeing shop, housing tiers, and a loan/stock

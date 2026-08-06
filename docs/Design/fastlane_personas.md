@@ -1,6 +1,7 @@
-# Fast Lane — Player Personas
+# One Day at a Time — Player Personas
+*(originally written for "Fast Lane," the project's prior working title — see `fast-lane_master_design_document.md` for the current name/scope. The persona profiles below are unchanged by that rename; only the framing paragraph above them has been updated.)*
 
-> **Purpose:** Reference personas for developing *Fast Lane*, an 8-bit-inspired, *Jones in the Fast Lane*-style weekly life-sim about early recovery. Unlike MRT (a daily-use crisis/wellness tool), Fast Lane is a session-based *game* — someone chooses to sit down and play it, most often *not* mid-crisis. Personas here are built around who would actually pick this up, why, and what would make the weekly-turn loop (limited time budget, location nodes: Work / Meeting / Sponsor / Service / Self-Care, random pitfall events) feel true rather than gimmicky or mocking.
+> **Purpose:** Reference personas for developing *One Day at a Time*, an 8-bit-inspired life-sim about early recovery, structurally descended from *Jones in the Fast Lane* but its own thing — a hybrid daily/weekly loop (one meaningful decision per day across Morning/Afternoon/Evening blocks, resolving against weekly checkpoints) organized around SAMHSA's ROSC framework (Health/Home/Purpose/Community), with an 11-location board (Home, Workplace, Employment Center, Meeting Hall, Sponsor's House, Service Center, Health Clinic, Bank, School, Family & Friends, Corner Store). Unlike MRT (a daily-use crisis/wellness tool), this is a session-based *game* — someone chooses to sit down and play it, most often *not* mid-crisis. Personas here are built around who would actually pick this up, why, and what would make that daily/weekly loop and location board feel true rather than gimmicky or mocking. Full mechanical spec: `fast-lane_master_design_document.md`, whose §2 persona table is the condensed cross-reference to this file.
 >
 > Grounded in current U.S. treatment-population data (cited inline where a specific claim is made) rather than assumption. Demographics of "people in recovery" are broad — this set intentionally avoids defaulting to a single archetype (e.g., young male, stimulant/opioid-focused) since <cite index="17-1">women account for only around 20% of people in drug or alcohol treatment despite being roughly half the population</cite>, and recovery populations span a wide age range.
 
@@ -8,10 +9,10 @@
 
 ## How to use these
 
-Same discipline as MRT's persona system: pick **one primary persona per feature or event**, design to their constraint, and let others be secondarily accommodated. For Fast Lane specifically, run these checks before shipping any activity node or pitfall event:
+Same discipline as MRT's persona system: pick **one primary persona per feature or event**, design to their constraint, and let others be secondarily accommodated. Run these checks before shipping any location activity, daily beat, or Crossroads event:
 
-1. **The Ringer Test** (named for the game's "ring" of activity nodes) — does this event/outcome ring true to someone who has actually lived it, or does it read like an outsider's guess?
-2. **The Punchline Test** — is the humor aimed at the *systems and absurdities* of early recovery (bureaucracy, awkward small talk, a sponsor who won't stop quoting the Big Book) rather than at the player's struggle itself? Fast Lane can be funny; it should never be funny *at* the player.
+1. **The Ringer Test** (named for the game's board of location nodes) — does this event/outcome ring true to someone who has actually lived it, or does it read like an outsider's guess?
+2. **The Punchline Test** — is the humor aimed at the *systems and absurdities* of early recovery (bureaucracy, awkward small talk, a sponsor who won't stop quoting the Big Book) rather than at the player's struggle itself? The game can be funny; it should never be funny *at* the player.
 3. **The Non-Manipulation Commitment** (shared with MRT2) — no streaks, no shame mechanics, aggregate-only analytics. A bad week in-game is a setback with a story beat, never a guilt trap.
 
 ---
